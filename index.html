@@ -1,0 +1,746 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>東京＋箱根 6天5夜｜行動手冊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EBE6;
+  --card:#FFFFFF;
+  --ink:#12293B;
+  --ink2:#4E6274;
+  --ink3:#8496A3;
+  --rule:#D2D8D1;
+  --board:#12293B;
+  --signal:#F2C230;
+  --jr:#9ACD32;
+  --keisei:#1B3A73;
+  --odakyu:#E8542F;
+  --tozan:#E5002D;
+  --bus:#F0803C;
+  --ship:#1E7A8C;
+  --rope:#7A5BA6;
+  --cable:#2E8B57;
+  --asakusa:#E9546B;
+  --ikegami:#EE86A7;
+  --walk:#8496A3;
+  --num:"Barlow Condensed","Helvetica Neue",Arial,sans-serif;
+  --sans:"Hiragino Sans","PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.65;-webkit-text-size-adjust:100%;
+}
+.wrap{max-width:480px;margin:0 auto;padding:0 14px 96px}
+.num{font-family:var(--num);font-variant-numeric:tabular-nums;letter-spacing:.01em}
+
+/* ── 頁首 ───────────────────────── */
+header{position:sticky;top:0;z-index:40;background:var(--paper);
+  border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top)}
+.head-in{max-width:480px;margin:0 auto;padding:10px 14px 0}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.brand h1{font-size:15px;margin:0;font-weight:700;letter-spacing:.02em}
+.brand .range{font-family:var(--num);font-size:14px;color:var(--ink2);font-weight:500}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:9px 0 0;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;background:transparent;border:1px solid var(--rule);border-radius:9px;
+  padding:5px 9px 6px;text-align:center;cursor:pointer;color:var(--ink2);
+  border-bottom-width:3px;font-family:inherit}
+.tab b{display:block;font-family:var(--num);font-size:17px;font-weight:600;line-height:1;color:var(--ink)}
+.tab span{display:block;font-family:var(--num);font-size:12px;line-height:1.4;letter-spacing:.02em}
+.tab[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 0 rgba(18,41,59,.08)}
+.tab.tokyo[aria-selected="true"]{border-bottom-color:var(--jr)}
+.tab.hakone[aria-selected="true"]{border-bottom-color:var(--tozan)}
+.tab.today::after{content:"今天";display:block;font-size:10px;color:var(--odakyu);line-height:1.3}
+
+/* ── 現在／下一站 ───────────────── */
+.board{background:var(--board);color:#fff;border-radius:14px;margin:14px 0 16px;overflow:hidden}
+.board-top{display:flex;justify-content:space-between;align-items:center;
+  padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.16)}
+.board-top .now{font-family:var(--num);font-size:14px;color:#C6D2DC;letter-spacing:.04em}
+.board-top .clock{font-family:var(--num);font-size:22px;font-weight:600;line-height:1}
+.board-body{padding:13px 14px 15px}
+.board-body .lbl{font-size:12px;color:#9FB2C0;margin-bottom:3px}
+.board-body .ttl{font-size:19px;font-weight:700;line-height:1.35;margin:0 0 2px}
+.board-body .sub{font-size:13px;color:#C6D2DC;margin:0}
+.board-body .at{font-family:var(--num);font-size:15px;color:var(--signal);font-weight:600}
+.bigmap{display:block;margin-top:12px;background:var(--signal);color:#12293B;
+  text-align:center;font-weight:700;font-size:16px;padding:13px;border-radius:10px;text-decoration:none}
+.bigmap:active{background:#DBAE24}
+button.bigmap{width:100%;border:none;font-family:inherit;cursor:pointer}
+.rawurl{font-size:12px;line-height:1.5;word-break:break-all;color:var(--ink2);
+  margin-top:7px;user-select:all;-webkit-user-select:all;flex-basis:100%}
+.fixed .rawurl{color:#C6D2DC}
+
+/* ── 日摘要 ─────────────────────── */
+.dayhead{margin:0 0 14px}
+.dayhead .dl{font-family:var(--num);font-size:13px;color:var(--ink2);letter-spacing:.04em}
+.dayhead h2{font-size:22px;margin:1px 0 6px;line-height:1.35}
+.dayhead p{margin:0;font-size:14px;color:var(--ink2)}
+
+/* ── 卡片與時間軸 ───────────────── */
+.card{background:var(--card);border-radius:12px;padding:13px 14px;margin-bottom:10px;
+  border:1px solid var(--rule)}
+.fixed{background:var(--board);border-color:var(--board);color:#fff;position:relative;
+  padding-left:18px}
+.fixed::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:5px;
+  background:var(--signal);border-radius:0 4px 4px 0}
+.fixed .t,.fixed h3{color:#fff}
+.fixed .meta{color:#C6D2DC}
+.row{display:flex;gap:11px}
+.t{font-family:var(--num);font-size:19px;font-weight:600;line-height:1.25;
+  flex:0 0 62px;color:var(--ink);padding-top:1px}
+.t.soft{color:var(--ink3);font-weight:500}
+.body{flex:1;min-width:0}
+h3{font-size:16.5px;margin:0 0 3px;line-height:1.4;font-weight:700}
+.meta{font-size:13.5px;color:var(--ink2);margin:0 0 2px}
+ul.pts{margin:6px 0 0;padding-left:17px;font-size:13.5px;color:var(--ink2)}
+ul.pts li{margin-bottom:2px}
+.chip{display:inline-block;font-size:11.5px;line-height:1;padding:4px 7px;border-radius:5px;
+  margin:0 0 0 6px;vertical-align:2px;font-weight:700;white-space:nowrap}
+.c-must{background:var(--board);color:#fff}
+.c-booked{background:var(--signal);color:#12293B}
+.c-rec{background:#fff;color:var(--board);border:1px solid var(--board)}
+.c-alt{background:#fff;color:var(--ink3);border:1px solid var(--rule)}
+.c-drop{background:#fff;color:var(--ink3);border:1px dashed var(--ink3)}
+.fixed .c-rec{background:transparent;color:#fff;border-color:#fff}
+
+/* 交通路線圖 */
+.route{margin:9px 0 4px;padding:2px 0 0}
+.stn{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600}
+.stn i{width:11px;height:11px;border-radius:50%;border:3px solid var(--ink);
+  background:var(--card);flex:0 0 11px;font-style:normal}
+.leg{display:flex;align-items:center;gap:9px;min-height:30px}
+.leg .bar{width:11px;flex:0 0 11px;align-self:stretch;display:flex;justify-content:center}
+.leg .bar em{width:5px;background:var(--walk);display:block;border-radius:3px}
+.leg .lname{font-size:13px;color:var(--ink2);padding:4px 0}
+.leg .mins{font-family:var(--num);font-size:13px;color:var(--ink3);margin-left:4px}
+.fixed .stn i{border-color:#fff;background:var(--board)}
+.fixed .leg .lname{color:#C6D2DC}
+
+/* 按鈕 */
+.acts{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;
+  text-decoration:none;color:var(--board);background:#EEF2F4;border:1px solid var(--rule);
+  border-radius:8px;padding:8px 11px;cursor:pointer;font-family:inherit}
+.btn:active{background:#DDE5E9}
+.btn.map{background:var(--board);color:#fff;border-color:var(--board)}
+.fixed .btn{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+.disc{margin-top:9px}
+.disc summary{font-size:13.5px;color:var(--ink2);cursor:pointer;list-style:none;
+  display:inline-flex;align-items:center;gap:5px;font-weight:600}
+.disc summary::-webkit-details-marker{display:none}
+.disc summary::before{content:"＋";font-family:var(--num);font-weight:600}
+.disc[open] summary::before{content:"－"}
+.disc .in{font-size:13.5px;color:var(--ink2);padding-top:5px;border-top:1px solid var(--rule);margin-top:7px}
+.fixed .disc .in{border-color:rgba(255,255,255,.2);color:#C6D2DC}
+.warn{background:#FFF6DC;border:1px solid #ECD79A;border-radius:9px;padding:9px 11px;
+  font-size:13.5px;color:#5C4A11;margin-top:9px}
+.skip{font-size:13.5px;color:var(--ink2)}
+.skip b{color:var(--ink)}
+
+/* 勾選 */
+.chk{appearance:none;width:22px;height:22px;border:2px solid var(--ink3);border-radius:6px;
+  flex:0 0 22px;margin:2px 0 0;cursor:pointer;background:var(--card);position:relative}
+.chk:checked{background:var(--board);border-color:var(--board)}
+.chk:checked::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:12px;
+  border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)}
+.done h3,.done .meta{opacity:.42;text-decoration:line-through}
+.done .route,.done .acts{opacity:.5}
+
+/* 區塊標題 */
+.sect{margin:26px 0 9px;display:flex;align-items:baseline;justify-content:space-between}
+.sect h4{font-size:14px;margin:0;letter-spacing:.03em}
+.sect span{font-size:12.5px;color:var(--ink3)}
+.list label{display:flex;gap:11px;align-items:flex-start;padding:9px 0;
+  border-bottom:1px solid var(--rule);font-size:14.5px;cursor:pointer}
+.list label:last-child{border-bottom:none}
+.list .txt small{display:block;font-size:12.5px;color:var(--ink3);line-height:1.5}
+.list input:checked+.txt{opacity:.45;text-decoration:line-through}
+
+/* 底部導航 */
+nav.bot{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);
+  border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom)}
+nav.bot div{max-width:480px;margin:0 auto;display:flex}
+nav.bot button{flex:1;background:none;border:none;padding:10px 4px 11px;font-family:inherit;
+  font-size:12.5px;color:var(--ink3);cursor:pointer;font-weight:600}
+nav.bot button[aria-current="true"]{color:var(--board);box-shadow:inset 0 3px 0 var(--board)}
+.toast{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);background:var(--board);
+  color:#fff;font-size:14px;padding:9px 16px;border-radius:20px;opacity:0;pointer-events:none;
+  transition:opacity .18s;z-index:60}
+.toast.on{opacity:1}
+:focus-visible{outline:3px solid var(--odakyu);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header>
+  <div class="head-in">
+    <div class="brand">
+      <h1>東京＋箱根 6天5夜</h1>
+      <span class="range num">9/14 – 9/19</span>
+    </div>
+    <div class="tabs" id="tabs" role="tablist"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div id="view"></div>
+</div>
+
+<nav class="bot"><div>
+  <button data-view="day" aria-current="true">每日行程</button>
+  <button data-view="times">時間表</button>
+  <button data-view="shop">伴手禮</button>
+  <button data-view="info">資訊</button>
+</div></nav>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   單一資料區塊：所有內容只改這裡，頁面自動更新
+   ══════════════════════════════════════════════════════════ */
+const G = q => "https://www.google.com/maps/search/?api=1&query=" + q;
+
+const HOTEL_TOKYO = {name:"ART HOTEL Nippori Lungwood", addr:"東京都荒川區東日暮里5-50-5",
+  map:G("ART+HOTEL+Nippori+Lungwood"), note:"JR 日暮里站南口步行約 1 分鐘"};
+const HOTEL_HAKONE = {name:"湯本富士屋酒店 Yumoto Fujiya Hotel", addr:"神奈川縣足柄下郡箱根町湯本256-1",
+  map:G("Yumoto+Fujiya+Hotel"), note:"箱根湯本站步行約 3～5 分鐘"};
+
+/* 交通線色：對應日本實際路線識別色 */
+const LINE = {
+  walk:{c:"var(--walk)",n:"步行"},
+  jr:{c:"var(--jr)",n:"JR 山手線"},
+  skyliner:{c:"var(--keisei)",n:"京成 Skyliner"},
+  romancecar:{c:"var(--odakyu)",n:"小田急 Romancecar"},
+  tozan:{c:"var(--tozan)",n:"箱根登山電車"},
+  bus:{c:"var(--bus)",n:"箱根登山巴士 H 線"},
+  ship:{c:"var(--ship)",n:"箱根海賊觀光船"},
+  rope:{c:"var(--rope)",n:"箱根空中纜車"},
+  cable:{c:"var(--cable)",n:"箱根登山纜車"},
+  asakusa:{c:"var(--asakusa)",n:"都營淺草線"},
+  ikegami:{c:"var(--ikegami)",n:"東急池上線"},
+  air:{c:"var(--keisei)",n:"航班"}
+};
+
+const DAYS = [
+{
+ id:1, date:"2026-09-14", dow:"一", area:"tokyo",
+ title:"桃園 → 成田 → 日暮里",
+ key:"19:25 抵達成田",
+ lede:"抵達日就是抵達日。不排景點、不為晚餐趕車，順利進飯店休息就算達標。",
+ items:[
+  {t:"15:00", time:"15:00", title:"桃園機場 T1 出發", status:"已訂", fixed:true,
+   meta:"STARLUX JX804｜TPE 15:00 → NRT 19:25",
+   pts:["去程：桃園第 1 航廈 → 成田第 2 航廈（訂位畫面已確認）"]},
+
+  {t:"19:25", time:"19:25", title:"抵達成田 第 2 航廈", status:"必去", fixed:true,
+   meta:"入境到上車，預留 60～75 分鐘",
+   pts:["入境審查","領行李","找京成電鐵／Skyliner 售票處"]},
+
+  {t:"20:30", time:"約 20:30", title:"前往 Skyliner 月台", status:"必去",
+   map:{n:"京成電鐵 成田機場站", u:G("Keisei+Narita+Airport+Station")},
+   route:[{s:"成田機場"},{l:"skyliner"},{s:"日暮里站"}],
+   warn:"當晚實際搭乘班次尚未鎖定，現場依電子看板為準。"},
+
+  {t:"21:10", time:"約 21:10", title:"抵達日暮里，進飯店", status:"已訂",
+   meta:HOTEL_TOKYO.name+"｜"+HOTEL_TOKYO.note,
+   map:{n:"ART HOTEL Nippori Lungwood", u:HOTEL_TOKYO.map}, addr:HOTEL_TOKYO.addr},
+
+  {t:"21:40", time:"晚餐", soft:true, title:"馬賊 日暮里店", status:"候補",
+   meta:"手打麵／擔擔麵｜朋友推薦",
+   pts:["只有抵達順利、還有精神才去","否則便利商店就好，不要硬撐"],
+   map:{n:"馬賊 日暮里店", u:"https://maps.app.goo.gl/p38gji67Rp61CQ357?g_st=il"},
+   addr:"東京都荒川區西日暮里2-18-2"}
+ ],
+ skip:["任何正式景點","為了晚餐趕 Skyliner"]
+},
+{
+ id:2, date:"2026-09-15", dow:"二", area:"hakone",
+ title:"日暮里早餐 → 新宿兌票 → 箱根湯本",
+ key:"12:00 前到新宿",
+ lede:"全程第二個硬時間點。第一次到新宿站、又帶著大行李，緩衝要留足，不要把抵達時間壓到 12:30 之後。",
+ items:[
+  {t:"09:00", time:"約 09:00", title:"起床", soft:true, meta:"今天不趕早，但也不能拖"},
+
+  {t:"09:15", time:"09:15", title:"Higurashi Bakery 早餐", status:"建議",
+   meta:"朋友推薦｜咖哩麵包、新鮮果汁、可內用",
+   route:[{s:"ART HOTEL"},{l:"walk"},{s:"Higurashi Bakery"}],
+   map:{n:"Higurashi Bakery", u:"https://maps.app.goo.gl/hwW4ne6FAMzJuo7v8?g_st=il"},
+   pts:["10:15 前一定要往回走"]},
+
+  {t:"10:15", time:"10:15", title:"回飯店拿行李", status:"必去",
+   pts:["29 吋＋20 吋行李","最後確認護照、KLOOK 憑證、Romancecar 訂單"]},
+
+  {t:"10:40", time:"10:40", title:"離開 ART HOTEL 前往新宿", status:"必去",
+   route:[{s:"日暮里站"},{l:"jr", note:"往池袋／新宿方向", mins:"約 25 分"},{s:"新宿站"}],
+   warn:"帶大行李，不能只用列車時間計算。電梯、月台移動、人潮都要算進去。"},
+
+  {t:"11:20", time:"11:20", title:"目標抵達新宿", status:"必去", fixed:true,
+   meta:"控制點：最晚 11:40，不可晚於 12:00",
+   map:{n:"小田急新宿站", u:G("Odakyu+Shinjuku+Station")}},
+
+  {t:"11:30", time:"11:20–12:30", title:"兌換箱根周遊券（實體票）", status:"必去",
+   meta:"新宿西口小田急旅遊服務中心｜西新宿1-1-3 小田急線新宿駅西口地下コンコース｜服務時間 08:00–16:00",
+   pts:["KKday 箱根周遊券 3 日券・成人 x2，效期涵蓋 9/15–9/17","JR 新宿站下車後往「西口」，再依「小田急線 / Odakyu」指標走地下通道",
+        "只有周遊券要換實體票；Romancecar 特急券不用取票","換完票順便確認 13:00 的月台","有剩才買飲料、便當"],
+   map:{n:"小田急旅遊服務中心 新宿西口", u:G("Odakyu+Sightseeing+Service+Center+Shinjuku+West")},
+   addr:"東京都新宿区西新宿1-1-3 小田急線新宿駅西口地下コンコース",
+   warn:"周遊券就是 Romancecar 的乘車券。沒換到票不能上車，這件事排在買東西之前。"},
+
+  {t:"13:00", time:"13:00", title:"箱根 9 號 (MSE6) 出發", status:"已訂", fixed:true,
+   meta:"4 號車廂 2A・2B｜確認編號 E272｜13:00 → 14:30",
+   route:[{s:"新宿"},{l:"romancecar", mins:"90 分"},{s:"箱根湯本"}],
+   pts:["EMot 電子特急券，不需取票，直接上車","上車前先登入 EMot 把票面叫出來，截圖不一定認","手機要有電；兩人各自顯示或由一人統一出示"]},
+
+  {t:"14:20", time:"約 14:20", title:"抵達箱根湯本",
+   map:{n:"箱根湯本站", u:G("Hakone-Yumoto+Station")}},
+
+  {t:"14:30", time:"約 14:30", title:"湯本富士屋酒店 Check-in", status:"已訂",
+   meta:HOTEL_HAKONE.note,
+   route:[{s:"箱根湯本站"},{l:"walk", mins:"3–5 分"},{s:"湯本富士屋酒店"}],
+   map:{n:"Yumoto Fujiya Hotel", u:HOTEL_HAKONE.map}, addr:HOTEL_HAKONE.addr},
+
+  {t:"15:00", time:"15:00–17:00", title:"箱根湯本商店街", status:"建議",
+   pts:["商店街小吃","箱根伴手禮","早川周邊散步"],
+   map:{n:"箱根湯本商店街", u:G("Hakone+Yumoto+Shopping+Street")}},
+
+  {t:"18:00", time:"晚上", soft:true, title:"泡湯＋湯本附近晚餐", status:"建議",
+   meta:"今天走完就好，體力留給明天"}
+ ],
+ skip:["大涌谷","強羅","蘆之湖","任何遠距離景點"]
+},
+{
+ id:3, date:"2026-09-16", dow:"三", area:"hakone",
+ title:"箱根神社 → 海賊船 → 大涌谷 → 強羅",
+ key:"09:30–09:45 出發",
+ lede:"全程最需要控制交通時間的一天。記法：巴士 → 神社 → 船 → 空中纜車 → 大涌谷 → 空中纜車 → 登山纜車 → 登山電車。",
+ items:[
+  {t:"09:30", time:"09:30", title:"飯店出發", status:"必去", fixed:true,
+   meta:"最晚 09:45，不要拖到 10:30",
+   route:[{s:"湯本富士屋酒店"},{l:"walk"},{s:"箱根湯本站"},{l:"bus", note:"往元箱根港／箱根町港方向"},{s:"元箱根港"}]},
+
+  {t:"10:20", time:"約 10:20", title:"抵達元箱根港",
+   map:{n:"元箱根港", u:G("Moto-Hakone+Port")},
+   warn:"巴士實際班次未鎖定，現場看站牌時刻表。"},
+
+  {t:"10:40", time:"10:40–12:15", title:"箱根神社＋平和鳥居", status:"必去",
+   meta:"神奈川縣足柄下郡箱根町元箱根80-1",
+   pts:["水上鳥居可能排隊","媽媽若不想走階梯，優先湖畔鳥居與下方區域","12:15 左右必須開始往元箱根港回走"],
+   map:{n:"箱根神社", u:G("Hakone+Shrine")},
+   map2:{n:"平和鳥居", u:G("Torii+of+Peace+Hakone")},
+   warn:"鳥居拍照隊伍太長就縮短或放棄。不要用後面的交通去換一張照片。"},
+
+  {t:"12:40", time:"12:40–13:30", title:"海賊船前往桃源台", status:"必去", fixed:true,
+   meta:"控制點：最好 14:00 前抵達桃源台",
+   route:[{s:"元箱根港"},{l:"ship"},{s:"桃源台港"}],
+   map:{n:"海賊船 元箱根港", u:G("Hakone+Sightseeing+Cruise+Moto-Hakone+Port")},
+   map2:{n:"桃源台港", u:G("Togendai+Port")},
+   warn:"班次未鎖定，抵達元箱根港先確認下一班開船時間。"},
+
+  {t:"13:30", time:"13:30–14:00", title:"空中纜車上大涌谷", status:"必去",
+   route:[{s:"桃源台"},{l:"rope"},{s:"姥子"},{l:"rope"},{s:"大涌谷"}]},
+
+  {t:"14:00", time:"14:00–15:20", title:"大涌谷", status:"必去",
+   pts:["火山景觀","黑玉子","拍照、休息"],
+   map:{n:"大涌谷", u:G("Owakudani")}},
+
+  {t:"15:20", time:"15:20–15:30", title:"離開大涌谷", status:"必去", fixed:true,
+   meta:"不要壓最後營運時間",
+   warn:"各站最後安全搭乘時間尚未確認，當天在站內先看公告。"},
+
+  {t:"15:30", time:"15:30 後", title:"下山回箱根湯本",
+   route:[{s:"大涌谷"},{l:"rope"},{s:"早雲山"},{l:"cable"},{s:"強羅"},{l:"tozan"},{s:"箱根湯本"}],
+   map:{n:"早雲山站", u:G("Sounzan+Station")},
+   map2:{n:"強羅站", u:G("Gora+Station+Hakone")}},
+
+  {t:"17:00", time:"約 17:00", title:"回湯本富士屋｜晚餐、泡湯", status:"建議", soft:true}
+ ],
+ skip:["強羅公園","仙石原芒草原","雕刻之森美術館（明天去）"]
+},
+{
+ id:4, date:"2026-09-17", dow:"四", area:"hakone",
+ title:"雕刻之森 → 箱根湯本 → 東京／日暮里",
+ key:"15:52 箱根 14 號",
+ lede:"回程是 15:52 對號座，等於美術館有硬退場時間。大行李寄放飯店輕裝出門，14:10 一定要離開雕刻之森。",
+ items:[
+  {t:"09:00", time:"09:00–10:00", title:"早餐＋整理行李"},
+
+  {t:"10:00", time:"約 10:00", title:"Check-out，大行李寄放飯店", status:"必去", fixed:true,
+   meta:"不要拖大行李去美術館"},
+
+  {t:"10:20", time:"約 10:20", title:"前往雕刻之森",
+   route:[{s:"箱根湯本"},{l:"tozan"},{s:"雕刻之森站"},{l:"walk"},{s:"箱根雕刻之森美術館"}],
+   map:{n:"雕刻之森站", u:G("Chokoku-no-Mori+Station")}},
+
+  {t:"11:00", time:"11:00–13:15", title:"箱根雕刻之森美術館", status:"必去",
+   meta:"神奈川縣足柄下郡箱根町二之平1121｜官方 09:00–17:00，最後入場 16:30",
+   pts:["建議停留 2～2.5 小時","不用趕，可利用館內休息點與足湯"],
+   map:{n:"箱根雕刻之森美術館", u:G("Hakone+Open-Air+Museum")}},
+
+  {t:"13:15", time:"13:15–14:10", title:"午餐", status:"建議", soft:true,
+   meta:"14:10 前要往車站走，今天回程是對號車"},
+
+  {t:"14:10", time:"約 14:10", title:"回箱根湯本取行李", status:"必去",
+   route:[{s:"雕刻之森站"},{l:"tozan", mins:"約 35 分"},{s:"箱根湯本"},{l:"walk", mins:"3–5 分"},{s:"湯本富士屋酒店"}],
+   pts:["約 15:00 到飯店拿行李","15:35 前回到箱根湯本站月台"]},
+
+  {t:"15:52", time:"15:52", title:"箱根 14 號 (EXE6) 回東京", status:"已訂", fixed:true,
+   meta:"2 號車廂 2A・2B｜確認編號 E464｜15:52 → 新宿 17:27",
+   route:[{s:"箱根湯本"},{l:"romancecar", mins:"95 分"},{s:"新宿"},{l:"jr", mins:"約 25 分"},{s:"日暮里"}],
+   pts:["EMot 電子特急券，不用取票，上車前登入叫出票面","周遊券 9/17 仍在效期內，回程乘車券由它涵蓋","新宿轉 JR 山手線帶行李，抓 20–25 分緩衝"]},
+
+  {t:"18:10", time:"約 18:10", title:"回 ART HOTEL", map:{n:"ART HOTEL Nippori Lungwood", u:HOTEL_TOKYO.map}},
+
+  {t:"19:00", time:"晚上 A", title:"KITTE 丸之內＋東京車站夜景", status:"可取消",
+   meta:"回到日暮里已 18:10，有體力才去｜東京都千代田區丸之內2-7-2",
+   route:[{s:"日暮里"},{l:"jr"},{s:"東京站"},{l:"walk"},{s:"KITTE 丸之內"}],
+   map:{n:"KITTE 丸之內", u:G("KITTE+Marunouchi")},
+   pts:["累就直接取消，不影響主要行程"]},
+
+  {t:"19:01", time:"晚上 B", title:"日暮里晚餐＋錢湯", status:"建議",
+   meta:"累了就選這個",
+   pts:["馬賊 日暮里店：擔擔麵","日暮里 斉藤湯：朋友推薦錢湯（東日暮里6-59-2）","斉藤湯週五公休，所以要泡就是今晚","Yajiro 手羽先：離飯店很近，適合外帶宵夜"],
+   map:{n:"日暮里 斉藤湯", u:"https://maps.app.goo.gl/hGHNKRSRDFTVDMoY9?g_st=il"},
+   map2:{n:"馬賊 日暮里店", u:"https://maps.app.goo.gl/p38gji67Rp61CQ357?g_st=il"}}
+ ]
+},
+{
+ id:5, date:"2026-09-18", dow:"五", area:"tokyo",
+ title:"戶越銀座 → 銀座／有樂町 → 東京站",
+ key:"約 10:30 出發",
+ lede:"主要採買日。伴手禮盡量今天買完，晚上回飯店直接整理進行李。斉藤湯今天公休，不排。",
+ items:[
+  {t:"10:30", time:"約 10:30", title:"出發前往戶越銀座", status:"必去",
+   route:[{s:"日暮里"},{l:"jr"},{s:"五反田"},{l:"ikegami"},{s:"戶越銀座站"}],
+   map:{n:"五反田站", u:G("Gotanda+Station")},
+   map2:{n:"戶越銀座站", u:G("Togoshi-Ginza+Station")}},
+
+  {t:"11:20", time:"11:20–14:00", title:"戶越銀座商店街", status:"必去",
+   pts:["午餐","小吃","商店","東京生活街區散步"],
+   map:{n:"戶越銀座商店街", u:G("Togoshi+Ginza+Shopping+Street")}},
+
+  {t:"14:00", time:"約 14:00", title:"戶越 → 東銀座", status:"必去",
+   meta:"不要折返回五反田",
+   route:[{s:"戶越銀座商店街"},{l:"walk"},{s:"都營淺草線 戶越站"},{l:"asakusa"},{s:"東銀座站"}],
+   map:{n:"戶越站", u:G("Togoshi+Station+Tokyo")},
+   map2:{n:"東銀座站", u:G("Higashi-Ginza+Station")}},
+
+  {t:"14:40", time:"14:40–19:00", title:"銀座／有樂町／東京站採買", status:"建議",
+   meta:"依當天實際位置與需求調整順序，不需要每間都逛",
+   pts:["MUJI 銀座｜中央區銀座3-3-5","UNIQLO 銀座｜中央區銀座6-9-5","Bic Camera 有樂町店｜千代田區有樂町1-11-1","茅乃舍（高湯／伴手禮）：分店待確認，出發前補上","東京車站：伴手禮 Checklist 見下方「伴手禮」頁"],
+   map:{n:"MUJI 銀座", u:G("MUJI+Ginza")},
+   map2:{n:"Bic Camera 有樂町", u:G("Bic+Camera+Yurakucho")},
+   warn:"茅乃舍實際分店尚未決定，不要照印象跑錯地方。"},
+
+  {t:"18:00", time:"傍晚", title:"東京車站", status:"建議",
+   map:{n:"東京車站", u:G("Tokyo+Station")},
+   pts:["櫃位、營業時間、有無現貨，當天再確認"]},
+
+  {t:"18:30", time:"晚上", title:"KITTE 丸之內", status:"建議",
+   meta:"Day 4 沒去就放今天，看東京車站夜景收尾",
+   map:{n:"KITTE 丸之內", u:G("KITTE+Marunouchi")}},
+
+  {t:"19:30", time:"機動", title:"TAKEYA 1 多慶屋", status:"候補",
+   meta:"台東區台東4-12-1｜鄰近御徒町、仲御徒町",
+   pts:["零食沒買齊","藥妝需要補","想比較日用品／小家電","阿美橫丁不安排"],
+   map:{n:"TAKEYA 1", u:G("TAKEYA+1+Tokyo")}},
+
+  {t:"21:00", time:"回飯店", soft:true, title:"整理戰利品", status:"必去",
+   pts:["想吃宵夜可考慮 Yajiro 手羽先","斉藤湯今天公休"]}
+ ],
+ skip:["斉藤湯（週五公休）","阿美橫丁"]
+},
+{
+ id:6, date:"2026-09-19", dow:"六", area:"tokyo",
+ title:"谷中銀座 → 成田 → 台灣",
+ key:"16:25 Skyliner 首選",
+ lede:"最後一天不跑遠、不大量採買。核心就兩件事：悠閒散步，準時搭上 Skyliner。",
+ items:[
+  {t:"09:30", time:"09:30–10:30", title:"早餐", status:"建議",
+   meta:"Day 2 沒吃到就補 Higurashi Bakery；吃過了就日暮里附近自由選",
+   map:{n:"Higurashi Bakery", u:"https://maps.app.goo.gl/hwW4ne6FAMzJuo7v8?g_st=il"}},
+
+  {t:"10:30", time:"10:30–13:30", title:"谷中銀座商店街", status:"必去",
+   meta:"東京都台東區谷中3-13-1｜JR 日暮里站西口步行約 5 分鐘",
+   route:[{s:"ART HOTEL／日暮里站"},{l:"walk", mins:"約 5 分"},{s:"谷中銀座"}],
+   pts:["途中經過夕やけだんだん（夕陽階梯）","散步、小店、午餐","不大量採買"],
+   map:{n:"谷中銀座商店街", u:G("Yanaka+Ginza+Shopping+Street")},
+   map2:{n:"夕やけだんだん", u:G("Yuyake+Dandan+Tokyo")}},
+
+  {t:"14:00", time:"14:00–15:20", title:"回 ART HOTEL 取行李", status:"必去", fixed:true,
+   meta:"15:20 前一定要回到飯店",
+   pts:["拿寄放行李","整理行李","確認護照","上洗手間"]},
+
+  {t:"16:00", time:"約 16:00", title:"前往京成日暮里站", status:"必去",
+   map:{n:"京成日暮里站", u:G("Keisei+Nippori+Station")}},
+
+  {t:"16:25", time:"16:25", title:"Skyliner 前往成田", status:"必去", fixed:true,
+   meta:"首選班次｜連假人潮明顯則改搭約 15:45",
+   route:[{s:"日暮里"},{l:"skyliner"},{s:"成田機場 第 2 航廈"}],
+   warn:"最終購票班次尚未確定。不建議壓更晚的班次。"},
+
+  {t:"20:40", time:"20:40", title:"成田起飛", status:"已訂", fixed:true,
+   meta:"NRT 第 2 航廈 → TPE 第 1 航廈｜預計約 23:20 抵達台灣"}
+ ]
+}
+];
+
+const CONTROL = [
+ {d:"9/14", t:"19:25 抵達成田", r:"不趕景點、不為晚餐趕車"},
+ {d:"9/15", t:"12:00 前到新宿", r:"第一次到新宿＋KLOOK 兌票，必須留緩衝"},
+ {d:"9/15", t:"13:00 Romancecar", r:"已購票，不可錯過"},
+ {d:"9/16", t:"09:30–09:45 出發", r:"箱根核心日不要拖到 10:30"},
+ {d:"9/16", t:"12:15 離開神社區域", r:"鳥居排隊過長就縮短"},
+ {d:"9/16", t:"14:00 前後到桃源台", r:"避免後段纜車時間過緊"},
+ {d:"9/16", t:"15:20–15:30 離開大涌谷", r:"不壓最後營運時間"},
+ {d:"9/17", t:"約 10:00 退房", r:"行李留湯本富士屋再去美術館"},
+ {d:"9/17", t:"14:10 離開雕刻之森", r:"15:00 取行李、15:35 到月台"},
+ {d:"9/17", t:"15:52 箱根 14 號", r:"對號座已購票，不可錯過"},
+ {d:"9/19", t:"約 15:20 前回飯店", r:"不要最後一刻才離開谷中"},
+ {d:"9/19", t:"16:25 Skyliner", r:"連假人潮明顯則提前約 15:45"}
+];
+
+const SOUVENIR = [
+ {n:"New York Perfect Cheese", w:"東京車站"},
+ {n:"PISTA & TOKYO", w:"東京車站"},
+ {n:"N.Y. CARAMEL SAND", w:"東京車站"},
+ {n:"Tokyo Milk Cheese Factory", w:"東京車站"},
+ {n:"Sugar Butter Tree", w:"東京車站"},
+ {n:"Ginza Nenrinya", w:"東京車站"},
+ {n:"God Bless Butter", w:"東京車站"},
+ {n:"Okada Kinsei An Butter Ya", w:"東京車站"},
+ {n:"noix de beurre", w:"東京車站"},
+ {n:"Échiré 奶油餅乾", w:"東京車站"},
+ {n:"茅乃舍高湯", w:"銀座／東京站，分店待確認"},
+ {n:"箱根伴手禮", w:"9/15 箱根湯本商店街"}
+];
+
+const PENDING = [
+ "9/16 空中纜車各站最後安全搭乘時間",
+ "9/18 茅乃舍實際安排分店",
+ "9/19 Skyliner 最終購買班次（首選 16:25）",
+ "9/14 落地後 Skyliner 末班時間（不需訂票，先知道即可）",
+ "9/16 箱根湯本 → 元箱根港巴士班次（現場看站牌）",
+ "9/16 元箱根港 → 桃源台海賊船班次（現場看港口）",
+ "出發前：EMot 登入方式測試一次（信箱驗證碼收得到）",
+ "出發前：KKday 周遊券憑證、EMot 兩張特急券畫面存離線"
+];
+
+const PICKS = [
+ {n:"Higurashi Bakery", u:"早餐｜咖哩麵包、新鮮果汁", d:"9/15 第一順位，9/19 備案",
+  m:"https://maps.app.goo.gl/hwW4ne6FAMzJuo7v8?g_st=il"},
+ {n:"馬賊 日暮里店", u:"晚餐｜手打擔擔麵", d:"9/17 第一候補，9/14 晚上備案",
+  a:"東京都荒川區西日暮里2-18-2", m:"https://maps.app.goo.gl/p38gji67Rp61CQ357?g_st=il"},
+ {n:"日暮里 斉藤湯", u:"錢湯", d:"9/17 晚上（9/18 週五公休）",
+  a:"東京都荒川區東日暮里6-59-2", m:"https://maps.app.goo.gl/hGHNKRSRDFTVDMoY9?g_st=il"},
+ {n:"Yajiro／やじろう", u:"手羽先｜外帶、宵夜", d:"9/14、9/17、9/18 視情況",
+  a:"東京都荒川區東日暮里5-51-1 八木澤大樓1F", m:"https://maps.app.goo.gl/aK3qj2j4Sd6iqtL2A?g_st=il"},
+ {n:"Pelican Cafe（淺草／田原町）", u:"早午餐候選", d:"目前不為這間店加淺草行程",
+  m:"https://yukigo.tw/pelican-cafe/"}
+];
+
+/* ══════════════════════════════════════════════════════════
+   以下為版面邏輯
+   ══════════════════════════════════════════════════════════ */
+const CH = {"必去":"c-must","已訂":"c-booked","建議":"c-rec","候補":"c-alt","可取消":"c-drop"};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let checks = {}, curDay = 1, curView = "day";
+
+/* 儲存：優先用 artifact storage，失敗則僅存於本次開啟 */
+async function load(){
+  try{ const r = await window.storage.get("trip-checks"); if(r&&r.value){ checks = JSON.parse(r.value); return; } }catch(e){}
+  try{ const s = localStorage.getItem("trip-checks"); if(s) checks = JSON.parse(s); }catch(e){}
+}
+let saveTimer;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    try{ localStorage.setItem("trip-checks", JSON.stringify(checks)); }catch(e){}
+    try{ await window.storage.set("trip-checks", JSON.stringify(checks)); }catch(e){}
+  }, 400);
+}
+function jstNow(){
+  const d = new Date();
+  return new Date(d.getTime() + (d.getTimezoneOffset()+540)*60000);
+}
+function todayId(){
+  const s = jstNow().toISOString().slice(0,10);
+  const d = DAYS.find(x=>x.date===s);
+  return d ? d.id : null;
+}
+function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("on");
+  setTimeout(()=>t.classList.remove("on"),1500); }
+
+function routeHTML(r, dark){
+  return '<div class="route">' + r.map(x=>{
+    if(x.s) return '<div class="stn"><i></i>'+esc(x.s)+'</div>';
+    const L = LINE[x.l];
+    return '<div class="leg"><span class="bar"><em style="background:'+L.c+'"></em></span>'+
+      '<span class="lname">'+esc(L.n)+(x.note?'（'+esc(x.note)+'）':'')+
+      (x.mins?'<span class="mins">'+esc(x.mins)+'</span>':'')+'</span></div>';
+  }).join("") + '</div>';
+}
+function mapBtn(m, cls){ return '<button class="btn '+(cls||"map")+'" data-url="'+m.u+'">開啟 Google Maps・'+esc(m.n)+'</button>'; }
+
+/* 沙箱環境可能擋掉分頁開啟，逐層降級：新分頁 → 直接跳轉 → 複製連結 */
+function openLink(url, el){
+  let w = null;
+  try{ w = window.open(url, "_blank", "noopener"); }catch(e){}
+  if(w) return;
+  try{ window.top.location.href = url; return; }catch(e){}
+  try{ window.location.href = url; return; }catch(e){}
+  navigator.clipboard.writeText(url).then(()=>toast("連結已複製，請貼到瀏覽器")).catch(()=>toast("請長按下方連結開啟"));
+  if(el && !el.nextElementSibling?.classList.contains("rawurl")){
+    const d = document.createElement("div");
+    d.className = "rawurl"; d.textContent = url;
+    el.parentNode.insertBefore(d, el.nextSibling);
+  }
+}
+
+function itemHTML(it, di, i){
+  const k = "d"+di+"-"+i, done = !!checks[k];
+  let h = '<article class="card'+(it.fixed?" fixed":"")+(done?" done":"")+'" id="'+k+'"><div class="row">';
+  h += '<input class="chk" type="checkbox" data-k="'+k+'" '+(done?"checked":"")+' aria-label="完成 '+esc(it.title)+'">';
+  h += '<div class="t'+(it.soft?" soft":"")+' num">'+esc(it.time)+'</div><div class="body">';
+  h += '<h3>'+esc(it.title)+(it.status?'<span class="chip '+CH[it.status]+'">'+it.status+'</span>':'')+'</h3>';
+  if(it.meta) h += '<p class="meta">'+esc(it.meta)+'</p>';
+  if(it.route) h += routeHTML(it.route);
+  if(it.pts && it.pts.length) h += '<ul class="pts">'+it.pts.map(p=>'<li>'+esc(p)+'</li>').join("")+'</ul>';
+  if(it.warn) h += '<div class="warn">'+esc(it.warn)+'</div>';
+  const acts = [];
+  if(it.map) acts.push(mapBtn(it.map));
+  if(it.map2) acts.push(mapBtn(it.map2,"map"));
+  if(it.addr) acts.push('<button class="btn copy" data-copy="'+esc(it.addr)+'">複製地址</button>');
+  if(acts.length) h += '<div class="acts">'+acts.join("")+'</div>';
+  h += '</div></div></article>';
+  return h;
+}
+
+function nextItem(d){
+  const isToday = todayId()===d.id;
+  if(!isToday) return d.items.find(x=>x.fixed) || d.items[0];
+  const n = jstNow(), hm = String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");
+  return d.items.find((x,i)=>x.t>=hm && !checks["d"+d.id+"-"+i]) || d.items[d.items.length-1];
+}
+
+function boardHTML(d){
+  const it = nextItem(d), isToday = todayId()===d.id;
+  const n = jstNow(), clock = String(n.getHours()).padStart(2,"0")+":"+String(n.getMinutes()).padStart(2,"0");
+  let h = '<section class="board"><div class="board-top"><span class="now num">'+
+    (isToday? "日本時間 · 今天":"日本時間 · 預覽 Day "+d.id)+'</span><span class="clock num">'+clock+'</span></div>';
+  h += '<div class="board-body"><div class="lbl">'+(isToday?"下一站":"這天的第一個控制點")+'</div>';
+  h += '<h2 class="ttl">'+esc(it.title)+'</h2>';
+  h += '<p class="sub"><span class="at num">'+esc(it.time)+'</span>'+(it.meta?'　'+esc(it.meta):'')+'</p>';
+  const m = it.map || (d.items.find(x=>x.map)||{}).map;
+  if(m) h += '<button class="bigmap" data-url="'+m.u+'">開啟 Google Maps・'+esc(m.n)+'</button>';
+  h += '</div></section>';
+  return h;
+}
+
+function dayHTML(d){
+  let h = boardHTML(d);
+  h += '<div class="dayhead"><div class="dl num">DAY '+d.id+' ・ '+d.date.slice(5).replace("-","/")+'（'+d.dow+'）</div>'+
+       '<h2>'+esc(d.title)+'</h2><p>'+esc(d.lede)+'</p></div>';
+  h += d.items.map((it,i)=>itemHTML(it,d.id,i)).join("");
+  if(d.skip) h += '<div class="card"><p class="skip"><b>今天不安排：</b>'+d.skip.map(esc).join("、")+'</p></div>';
+  return h;
+}
+
+function timesHTML(){
+  let h = '<div class="dayhead"><h2>現場必看時間</h2><p>只有這幾個時間點不能動，其他都可以依體力調整。</p></div>';
+  h += CONTROL.map(c=>'<article class="card"><div class="row"><div class="t num" style="flex:0 0 46px">'+c.d+
+    '</div><div class="body"><h3>'+esc(c.t)+'</h3><p class="meta">'+esc(c.r)+'</p></div></div></article>').join("");
+  h += '<div class="sect"><h4>不可自行變更</h4></div><div class="card"><ul class="pts">'+
+    ["9/15 13:00 Romancecar 已購票","9/15 抵達新宿不得晚於 12:00","不加阿美橫丁","9/18 不排斉藤湯（週五公休）",
+     "不加需要大幅繞路的新景點","未確認班次不寫成已確定"].map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
+  return h;
+}
+
+function shopHTML(){
+  let h = '<div class="dayhead"><h2>伴手禮清單</h2><p>不用全買。9/18 是主力採買日，櫃位與有無現貨當天再確認。</p></div>';
+  h += '<div class="card list">'+SOUVENIR.map((s,i)=>{
+    const k="sv"+i;
+    return '<label><input class="chk" type="checkbox" data-k="'+k+'" '+(checks[k]?"checked":"")+
+      '><span class="txt">'+esc(s.n)+'<small>'+esc(s.w)+'</small></span></label>';
+  }).join("")+'</div>';
+  h += '<div class="sect"><h4>出發前要確認的事</h4><span>'+PENDING.length+' 項</span></div>';
+  h += '<div class="card list">'+PENDING.map((p,i)=>{
+    const k="pd"+i;
+    return '<label><input class="chk" type="checkbox" data-k="'+k+'" '+(checks[k]?"checked":"")+
+      '><span class="txt">'+esc(p)+'</span></label>';
+  }).join("")+'</div>';
+  return h;
+}
+
+function infoHTML(){
+  let h = '<div class="dayhead"><h2>住宿・票券・店家</h2><p>地址可一鍵複製，直接貼給計程車或 Google Maps。</p></div>';
+  [HOTEL_TOKYO,HOTEL_HAKONE].forEach(x=>{
+    h += '<article class="card"><h3>'+esc(x.name)+'</h3><p class="meta">'+esc(x.addr)+'</p>'+
+      '<p class="meta">'+esc(x.note)+'</p><div class="acts">'+mapBtn({n:"導航",u:x.map})+
+      '<button class="btn copy" data-copy="'+esc(x.addr)+'">複製地址</button></div></article>';
+  });
+  h += '<div class="sect"><h4>票券備忘</h4></div><div class="card"><ul class="pts">'+
+    ["去程 9/15 箱根 9 號 (MSE6)｜新宿 13:00 → 箱根湯本 14:30｜4 號車廂 2A・2B｜E272",
+     "回程 9/17 箱根 14 號 (EXE6)｜箱根湯本 15:52 → 新宿 17:27｜2 號車廂 2A・2B｜E464",
+     "兩張都是 EMot 電子特急券：不用取票，上車前登入顯示票面即可",
+     "特急券只是加價券，另需乘車券——由箱根周遊券涵蓋",
+     "箱根周遊券（KKday・3 日券・成人 x2）：9/15 於新宿西口小田急旅遊服務中心換實體票，效期 9/15–9/17",
+     "9/19 Skyliner：首選 16:25，備案 15:45，尚未購票",
+     "護照、KKday 憑證、EMot 票面建議離線存手機；手機要有電"].map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
+  h += '<div class="sect"><h4>朋友推薦店家</h4></div>';
+  h += PICKS.map(p=>'<article class="card"><h3>'+esc(p.n)+'</h3><p class="meta">'+esc(p.u)+'</p>'+
+    '<p class="meta">'+esc(p.d)+'</p>'+(p.a?'<p class="meta">'+esc(p.a)+'</p>':'')+
+    '<div class="acts"><button class="btn map" data-url="'+p.m+'">開啟連結</button>'+
+    (p.a?'<button class="btn copy" data-copy="'+esc(p.a)+'">複製地址</button>':'')+'</div></article>').join("");
+  h += '<div class="sect"><h4>緊急時</h4></div><div class="card"><ul class="pts">'+
+    ["日本警察 110／消防・救護 119","旅外國人急難救助全球免付費專線：先確認撥打方式再存進手機",
+     "飯店地址用上方「複製地址」直接出示","走散時約定回合點：當日住宿飯店大廳"].map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
+  return h;
+}
+
+function renderTabs(){
+  const tid = todayId();
+  document.getElementById("tabs").innerHTML = DAYS.map(d=>
+    '<button class="tab '+d.area+(tid===d.id?" today":"")+'" role="tab" data-day="'+d.id+
+    '" aria-selected="'+(curDay===d.id&&curView==="day")+'"><b>'+d.id+'</b><span>'+
+    d.date.slice(5).replace("-","/")+'</span></button>').join("");
+}
+function render(){
+  renderTabs();
+  const v = document.getElementById("view");
+  v.innerHTML = curView==="day" ? dayHTML(DAYS.find(d=>d.id===curDay))
+    : curView==="times" ? timesHTML() : curView==="shop" ? shopHTML() : infoHTML();
+  document.querySelectorAll("nav.bot button").forEach(b=>
+    b.setAttribute("aria-current", b.dataset.view===curView));
+  window.scrollTo(0,0);
+}
+
+document.addEventListener("click", e=>{
+  const tab = e.target.closest(".tab");
+  if(tab){ curDay = +tab.dataset.day; curView = "day"; render(); return; }
+  const nav = e.target.closest("nav.bot button");
+  if(nav){ curView = nav.dataset.view; render(); return; }
+  const lk = e.target.closest("[data-url]");
+  if(lk){ openLink(lk.dataset.url, lk); return; }
+  const cp = e.target.closest(".copy");
+  if(cp){ navigator.clipboard.writeText(cp.dataset.copy).then(()=>toast("地址已複製")).catch(()=>toast("複製失敗，請長按選取")); return; }
+});
+document.addEventListener("change", e=>{
+  const c = e.target.closest(".chk");
+  if(!c) return;
+  checks[c.dataset.k] = c.checked; save();
+  const card = c.closest(".card");
+  if(card) card.classList.toggle("done", c.checked);
+});
+
+(async function init(){
+  await load();
+  const t = todayId(); if(t) curDay = t;
+  render();
+  setInterval(()=>{ if(curView==="day"){ const b=document.querySelector(".board"); if(b) b.outerHTML = boardHTML(DAYS.find(d=>d.id===curDay)); } }, 60000);
+})();
+</script>
