@@ -195,6 +195,8 @@ details.sec .in{padding:0 14px 6px}
   border-radius:8px;padding:8px 10px;margin:9px 0 2px}
 .pri{width:9px;height:9px;border-radius:50%;flex:0 0 9px;margin-top:8px}
 .p1{background:#D93025}.p2{background:var(--signal)}.p3{background:#C8D0D4}
+.btn.want{background:#fff;color:var(--ink2)}
+.btn.want.on{background:var(--signal);color:#12293B;border-color:var(--signal)}
 label.hide{display:none}
 :focus-visible{outline:3px solid var(--odakyu);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -293,11 +295,18 @@ const DAYS = [
  items:[
   {t:"09:00", time:"約 09:00", title:"起床", soft:true, meta:"今天不趕早，但也不能拖"},
 
-  {t:"09:15", time:"09:15", title:"Higurashi Bakery 早餐", status:"建議",
+  {t:"09:15", time:"09:15", title:"早餐 A｜Higurashi Bakery", status:"建議",
    meta:"朋友推薦｜咖哩麵包、新鮮果汁、可內用",
    route:[{s:"ART HOTEL"},{l:"walk"},{s:"Higurashi Bakery"}],
    map:{n:"Higurashi Bakery", u:"https://maps.app.goo.gl/hwW4ne6FAMzJuo7v8?g_st=il"},
-   pts:["10:15 前一定要往回走"]},
+   pts:["坐下來吃，今天唯一悠閒的早上","10:15 前一定要往回走"]},
+
+  {t:"09:16", time:"09:15", title:"早餐 B｜三明治 ポポー（外帶）", status:"候補", want:true,
+   meta:"西日暮里3-6-12｜7:00–13:00，售完即止｜週日、週一、國定假日公休",
+   pts:["從飯店走約 10 分鐘，西日暮里站徒步 2 分","招牌是 ポパイ（馬鈴薯沙拉＋蛋）與厚蛋三明治",
+        "9 點多才到，人氣品項可能已售完","買了帶回飯店或在車上吃，比內用省時間"],
+   map:{n:"三明治 ポポー", u:"https://maps.app.goo.gl/GzbQVwqzYaEbmX186"},
+   warn:"今天有 13:00 Romancecar 的硬時間。若隊伍長就直接放棄，改買便利商店。"},
 
   {t:"10:15", time:"10:15", title:"回飯店拿行李", status:"必去",
    pts:["29 吋＋20 吋行李","最後確認護照、KLOOK 憑證、Romancecar 訂單"]},
@@ -313,7 +322,7 @@ const DAYS = [
   {t:"11:30", time:"11:20–12:30", title:"兌換箱根周遊券（實體票）", status:"必去",
    meta:"新宿西口小田急旅遊服務中心｜西新宿1-1-3 小田急線新宿駅西口地下コンコース｜服務時間 08:00–16:00",
    pts:["KKday 箱根周遊券 3 日券・成人 x2，效期涵蓋 9/15–9/17","JR 新宿站下車後往「西口」，再依「小田急線 / Odakyu」指標走地下通道",
-        "只有周遊券要換實體票；Romancecar 特急券不用取票","換完票順便確認 13:00 的月台","有剩才買飲料、便當"],
+        "換周遊券時，順便把 EMot 特急券畫面出示給櫃檯確認一次","尖峰可能要排 15–20 分鐘，時間已預留","確認 13:00 的月台","有剩才買飲料、便當"],
    map:{n:"小田急旅遊服務中心 新宿西口", u:G("Odakyu+Sightseeing+Service+Center+Shinjuku+West")},
    addr:"東京都新宿区西新宿1-1-3 小田急線新宿駅西口地下コンコース",
    warn:"周遊券就是 Romancecar 的乘車券。沒換到票不能上車，這件事排在買東西之前。"},
@@ -321,7 +330,8 @@ const DAYS = [
   {t:"13:00", time:"13:00", title:"箱根 9 號 (MSE6) 出發", status:"已訂", fixed:true,
    meta:"4 號車廂 2A・2B｜確認編號 E272｜13:00 → 14:30",
    route:[{s:"新宿"},{l:"romancecar", mins:"90 分"},{s:"箱根湯本"}],
-   pts:["EMot 電子特急券，不需取票，直接上車","上車前先登入 EMot 把票面叫出來，截圖不一定認","手機要有電；兩人各自顯示或由一人統一出示"]},
+   pts:["EMot 電子特急券已出票（有座號＋確認編號），屬於不需取票的 ticketless 方案","上車前先登入 EMot 把票面叫出來，截圖不一定認",
+        "網路上有「KLOOK 特急券要到櫃檯換實體票」的說法，那是另一種方案；不確定就在換周遊券時一併問清楚","手機要有電；兩人各自顯示或由一人統一出示"]},
 
   {t:"14:20", time:"約 14:20", title:"抵達箱根湯本",
    map:{n:"箱根湯本站", u:G("Hakone-Yumoto+Station")}},
@@ -460,6 +470,12 @@ const DAYS = [
  key:"約 10:30 出發",
  lede:"主要採買日。伴手禮盡量今天買完，回程 Skyliner 實體票也在今天於日暮里換掉。斉藤湯今天公休，不排。",
  items:[
+  {t:"09:45", time:"約 09:45", title:"三明治 ポポー（西日暮里）｜買了就走", status:"美食候選", want:true,
+   meta:"7:00–13:00，售完即止｜週日、週一、國定假日公休｜9/18 週五有開",
+   pts:["飯店走約 10 分鐘，西日暮里站徒步 2 分","招牌 ポパイ（馬鈴薯沙拉＋蛋）、厚蛋三明治、水果三明治",
+        "買完回飯店或在山手線上吃，10:30 照常出發","今天沒有硬時間，比 Day 2 適合排這家"],
+   map:{n:"三明治 ポポー", u:"https://maps.app.goo.gl/GzbQVwqzYaEbmX186"}},
+
   {t:"10:30", time:"約 10:30", title:"出發前往戶越銀座", status:"必去",
    route:[{s:"日暮里"},{l:"jr"},{s:"五反田"},{l:"ikegami"},{s:"戶越銀座站"}],
    map:{n:"五反田站", u:G("Gotanda+Station")},
@@ -475,28 +491,58 @@ const DAYS = [
    map:{n:"戶越站", u:G("Togoshi+Station+Tokyo")},
    map2:{n:"東銀座站", u:G("Higashi-Ginza+Station")}},
 
+  {t:"14:20", time:"到東銀座後", title:"東銀座｜正餐候選（三選一）", status:"正餐候選", want:true,
+   meta:"同區替代方案，不需要全部去。等太久就換下一家",
+   pts:["五代目 花山うどん 銀座店：鬼ひも川超寬烏龍麵，第一順位，可能要整理券",
+        "喫茶 YOU：昭和喫茶的滑嫩蛋包飯，花山等太久就改這家",
+        "AMERICAN（アメリカン）：老派喫茶，巨大厚切蛋三明治；營業時間短、可能提早售完"],
+   map:{n:"五代目 花山うどん 銀座店", u:"https://maps.app.goo.gl/dnZqMRJPsPXz3"},
+   map2:{n:"喫茶 YOU", u:"https://maps.app.goo.gl/EvrSJbL3FXdn3"}},
+
+  {t:"14:21", time:"備援", title:"AMERICAN（アメリカン）", status:"正餐候選", want:true,
+   meta:"東銀座｜厚切蛋三明治｜份量大、可能提早售完",
+   map:{n:"AMERICAN 東銀座", u:"https://maps.app.goo.gl/h2rdczRxxW2Do"}},
+
   {t:"14:40", time:"14:40–19:00", title:"銀座／有樂町／東京站採買", status:"建議",
    meta:"依當天實際位置與需求調整順序，不需要每間都逛",
    pts:["MUJI 銀座｜中央區銀座3-3-5","UNIQLO 銀座｜中央區銀座6-9-5","Bic Camera 有樂町店｜千代田區有樂町1-11-1","東京車站：伴手禮 Checklist 見「伴手禮」頁"],
    map:{n:"MUJI 銀座", u:G("MUJI+Ginza")},
    map2:{n:"Bic Camera 有樂町", u:G("Bic+Camera+Yurakucho")}},
 
+  {t:"15:30", time:"逛街途中", title:"BONGEN COFFEE Tokyo Ginza", status:"咖啡候選", want:true,
+   meta:"銀座｜走累了再進去，不專程前往",
+   map:{n:"BONGEN COFFEE", u:"https://maps.app.goo.gl/P6Uj3iSwDKY1W"}},
+
   {t:"16:30", time:"傍晚", title:"茅乃舍 銀座店", status:"建議",
    meta:"高湯／伴手禮，分店已確定｜HARBS 已改到 9/19 上野店",
    map:{n:"東京銀座 茅乃舍", u:"https://share.google/ErPgFFn5heGtkQzmW"}},
+
+  {t:"17:00", time:"有樂町", title:"THE STAND", status:"甜點候選", want:true,
+   meta:"Cafe & Bar｜可麗露、咖啡｜靠近有樂町站，可搭 Bic Camera 動線",
+   map:{n:"THE STAND 有樂町", u:"https://maps.app.goo.gl/6mWJhDTMRZ6J8iDU6"}},
 
   {t:"18:00", time:"傍晚", title:"東京車站", status:"建議",
    map:{n:"東京車站", u:G("Tokyo+Station")},
    pts:["櫃位、營業時間、有無現貨，當天再確認"]},
 
+  {t:"18:10", time:"東京站", title:"BUTTER － Biei Pasture Diary Farm", status:"甜點候選", want:true,
+   meta:"丸大樓 B1｜北海道美瑛乳製品、奶油甜點｜走到丸之內再考慮，不專程",
+   map:{n:"BUTTER 丸之內", u:"https://maps.app.goo.gl/F4FPxuqDJfRbwRto7?g_st=ic"}},
+
   {t:"18:30", time:"晚上", title:"KITTE 丸之內", status:"建議",
    meta:"Day 4 沒去就放今天，看東京車站夜景收尾",
    map:{n:"KITTE 丸之內", u:G("KITTE+Marunouchi")}},
 
-  {t:"19:30", time:"機動", title:"TAKEYA 1 多慶屋", status:"候補",
-   meta:"台東區台東4-12-1｜鄰近御徒町、仲御徒町",
-   pts:["零食沒買齊","藥妝需要補","想比較日用品／小家電","阿美橫丁不安排"],
-   map:{n:"TAKEYA 1", u:G("TAKEYA+1+Tokyo")}},
+  {t:"19:30", time:"回程順路", title:"御徒町採買組｜久世福 → 多慶屋", status:"伴手禮候選", want:true,
+   meta:"兩家視為同一組。久世福關得早，先逛久世福再逛多慶屋",
+   route:[{s:"東京站"},{l:"jr", mins:"約 8 分"},{s:"御徒町"},{l:"walk"},{s:"PARCO_ya 上野"}],
+   pts:["久世福商店 PARCO_ya 上野店：地方食品、調味料、零食，鄰近 JR 御徒町站南口",
+        "TAKEYA 1 多慶屋（台東區台東4-33-2）：零食、藥妝、日用品一次補齊，1F–3F 通常營業到 23:00",
+        "營業時間當天再確認，不要憑印象跑",
+        "時間不夠就整組移到 Day 6，PARCO_ya 就是 HARBS 那棟，午餐後順路"],
+   map:{n:"久世福商店 PARCO_ya 上野店", u:"https://maps.app.goo.gl/fW1cPgZ1hwRnEQFf6?g_st=ic"},
+   map2:{n:"TAKEYA 1 多慶屋", u:G("TAKEYA+1+Okachimachi+Tokyo")},
+   warn:"不要為了趕店壓縮休息。今天沒逛完，Day 6 午餐後在同一棟樓補。"},
 
   {t:"20:30", time:"回到日暮里時", title:"日暮里站兌換 Skyliner 回程票", status:"必去", fixed:true,
    meta:"指定 9/19 約 16:00–16:30 從日暮里出發的班次",
@@ -525,8 +571,13 @@ const DAYS = [
    meta:"台東區上野3-24-6｜店 10:00 開，午餐套餐 11:00 開始｜JR 御徒町站北口出來就是",
    pts:["週六要 10:45–10:50 到，才能第一批入座不排隊","午餐套餐平日假日都有供應","義大利麵份量偏大，可考慮兩人分食再各點一塊蛋糕",
         "約 12:15 前離開，後面才不會壓縮"],
-   map:{n:"HARBS 上野店", u:"https://share.google/w5YRNyTh2VEXs9iQB"},
+   map:{n:"HARBS 上野店", u:"https://maps.app.goo.gl/1JKTARFSfrLsmrKg8?g_st=ic"},
    warn:"9/19 是週六，晚到就要排。11:30 後才到，等 40 分鐘以上是常態。"},
+
+  {t:"12:00", time:"午餐後", title:"久世福商店 PARCO_ya 上野店", status:"伴手禮候選", want:true,
+   meta:"就在 HARBS 同一棟，零繞路｜Day 5 沒逛完就在這裡補",
+   map:{n:"久世福商店 PARCO_ya 上野店", u:"https://maps.app.goo.gl/fW1cPgZ1hwRnEQFf6?g_st=ic"},
+   warn:"若還要補多慶屋，記得 14:30 前一定要往日暮里走。"},
 
   {t:"12:30", time:"12:30–14:30", title:"谷中銀座商店街", status:"必去",
    meta:"東京都台東區谷中3-13-1｜JR 日暮里站西口步行約 5 分鐘",
@@ -534,6 +585,10 @@ const DAYS = [
    pts:["途中經過夕やけだんだん（夕陽階梯）","散步、小店、拍照","不大量採買，行李已經滿了"],
    map:{n:"谷中銀座商店街", u:G("Yanaka+Ginza+Shopping+Street")},
    map2:{n:"夕やけだんだん", u:G("Yuyake+Dandan+Tokyo")}},
+
+  {t:"13:30", time:"散步途中", title:"Le Coussinet（根津／谷中）", status:"甜點候選", want:true,
+   meta:"法式甜點｜搭配谷中散步，時間不足直接取消",
+   map:{n:"Le Coussinet", u:"https://maps.app.goo.gl/fHJHipVb1RzqN4AW7"}},
 
   {t:"14:30", time:"14:30–15:20", title:"回 ART HOTEL 取行李", status:"必去", fixed:true,
    meta:"15:20 前一定要回到飯店",
@@ -590,6 +645,8 @@ const SOUVENIR = [
  {n:"noix de beurre", w:"東京車站"},
  {n:"Échiré 奶油餅乾", w:"東京車站"},
  {n:"茅乃舍高湯", w:"銀座店，9/18"},
+ {n:"久世福商店（地方食品、調味料）", w:"PARCO_ya 上野，9/18 或 9/19"},
+ {n:"多慶屋 零食藥妝補齊", w:"御徒町，9/18 或 9/19"},
  {n:"箱根伴手禮", w:"9/15 箱根湯本商店街"}
 ];
 
@@ -600,17 +657,47 @@ const PENDING = [
  "出發前：KKday 周遊券憑證、EMot 兩張特急券畫面存離線"
 ];
 
-const PICKS = [
- {n:"Higurashi Bakery", u:"早餐｜咖哩麵包、新鮮果汁", d:"9/15 第一順位，9/19 備案",
-  m:"https://maps.app.goo.gl/hwW4ne6FAMzJuo7v8?g_st=il"},
- {n:"馬賊 日暮里店", u:"晚餐｜手打擔擔麵", d:"9/17 第一候補，9/14 晚上備案",
-  a:"東京都荒川區西日暮里2-18-2", m:"https://maps.app.goo.gl/p38gji67Rp61CQ357?g_st=il"},
- {n:"日暮里 斉藤湯", u:"錢湯", d:"9/17 晚上（9/18 週五公休）",
-  a:"東京都荒川區東日暮里6-59-2", m:"https://maps.app.goo.gl/hGHNKRSRDFTVDMoY9?g_st=il"},
- {n:"Yajiro／やじろう", u:"手羽先｜外帶、宵夜", d:"9/14、9/17、9/18 視情況",
-  a:"東京都荒川區東日暮里5-51-1 八木澤大樓1F", m:"https://maps.app.goo.gl/aK3qj2j4Sd6iqtL2A?g_st=il"},
- {n:"Pelican Cafe（淺草／田原町）", u:"早午餐候選", d:"目前不為這間店加淺草行程",
-  m:"https://yukigo.tw/pelican-cafe/"}
+/* 餐廳與食品店一覽（資訊頁參考用） */
+const EATS = [
+{a:"日暮里・西日暮里", l:[
+ {n:"Higurashi Bakery", t:"麵包・早餐", d:"9/15 早餐 A", u:"https://maps.app.goo.gl/hwW4ne6FAMzJuo7v8?g_st=il", w:"朋友推薦｜咖哩麵包、新鮮果汁、可內用"},
+ {n:"三明治 ポポー", t:"三明治・外帶", d:"9/15 早餐 B｜9/18 首選", u:"https://maps.app.goo.gl/GzbQVwqzYaEbmX186", w:"7:00–13:00 售完即止，週日一及國定假日休｜西日暮里3-6-12"},
+ {n:"馬賊 日暮里店", t:"手打麵・擔擔麵", d:"9/14 備案｜9/17 候補", u:"https://maps.app.goo.gl/p38gji67Rp61CQ357?g_st=il", w:"朋友推薦｜西日暮里2-18-2"},
+ {n:"Yajiro／やじろう", t:"手羽先・宵夜", d:"9/14、9/17、9/18 視情況", u:"https://maps.app.goo.gl/aK3qj2j4Sd6iqtL2A?g_st=il", w:"離飯店很近，適合外帶｜東日暮里5-51-1"},
+ {n:"日暮里 斉藤湯", t:"錢湯（非餐廳）", d:"9/17 晚上", u:"https://maps.app.goo.gl/hGHNKRSRDFTVDMoY9?g_st=il", w:"週五公休，所以只有 9/17 那晚能泡｜東日暮里6-59-2"}
+]},
+{a:"箱根", l:[
+ {n:"籠清 かまぼこ横丁 みつき店", t:"魚板小吃", d:"9/15 商店街", u:"https://maps.app.goo.gl/Kgj3SjuV9Hq7yDvFA", w:"當點心，不當正餐"},
+ {n:"蕎麥麵 はつ花 本店", t:"蕎麥麵", d:"9/15 晚餐", u:"https://maps.app.goo.gl/eMDT47WUCA4CLACQ7", w:"人氣「天婦羅天蕎麵」，蕎麥麵有嚼勁"},
+ {n:"Bakery and Table 箱根", t:"麵包・可外帶", d:"9/16 元箱根港午餐", u:"https://share.google/auW0wVGjBGZIOH3KE", w:"最省時的選項，買了直接上船"},
+ {n:"Hamburg House", t:"漢堡排", d:"9/16 元箱根港午餐", u:"https://maps.app.goo.gl/RMpqEPsn8iGJcTDC7", w:"想坐下來吃就選這家，但要看船班時間"},
+ {n:"芦ノ湖テラス", t:"湖景餐廳", d:"9/16 元箱根港午餐", u:"https://maps.app.goo.gl/h1qHNeTUbcHvaumP9", w:"景觀好，但要留意等位"}
+]},
+{a:"新宿", l:[
+ {n:"茶の池田や", t:"抹茶專門店", d:"9/17 傍晚", u:"https://maps.app.goo.gl/92AovjDZzkmMQu8QA", w:"小田急 Ace 南館 B1｜營業至 21:00｜可能有丸久小山園"}
+]},
+{a:"東銀座・銀座", l:[
+ {n:"五代目 花山うどん 銀座店", t:"烏龍麵", d:"9/18 正餐第一順位", u:"https://maps.app.goo.gl/dnZqMRJPsPXz3", w:"鬼ひも川超寬烏龍麵｜可能要整理券"},
+ {n:"喫茶 YOU", t:"昭和喫茶・洋食", d:"9/18 正餐替代", u:"https://maps.app.goo.gl/EvrSJbL3FXdn3", w:"滑嫩蛋包飯｜花山排太久就改這家"},
+ {n:"AMERICAN（アメリカン）", t:"老派喫茶・三明治", d:"9/18 正餐替代", u:"https://maps.app.goo.gl/h2rdczRxxW2Do", w:"巨大厚切蛋三明治｜營業時間短、可能提早售完"},
+ {n:"BONGEN COFFEE Tokyo Ginza", t:"咖啡", d:"9/18 逛街途中", u:"https://maps.app.goo.gl/P6Uj3iSwDKY1W", w:"走累了再進去，不專程前往"},
+ {n:"東京銀座 茅乃舍", t:"高湯・食品伴手禮", d:"9/18 傍晚", u:"https://share.google/ErPgFFn5heGtkQzmW", w:"分店已確定"}
+]},
+{a:"有樂町・東京站", l:[
+ {n:"THE STAND", t:"Cafe & Bar", d:"9/18 有樂町", u:"https://maps.app.goo.gl/6mWJhDTMRZ6J8iDU6", w:"可麗露、咖啡｜可搭 Bic Camera 動線"},
+ {n:"BUTTER － Biei Pasture Diary Farm", t:"奶油甜點", d:"9/18 東京站", u:"https://maps.app.goo.gl/F4FPxuqDJfRbwRto7?g_st=ic", w:"丸大樓 B1｜北海道美瑛乳製品｜不專程前往"}
+]},
+{a:"御徒町・上野", l:[
+ {n:"HARBS 上野店", t:"蛋糕・午餐套餐", d:"9/19 午餐・必去", u:"https://maps.app.goo.gl/1JKTARFSfrLsmrKg8?g_st=ic", w:"PARCO_ya 2F｜店 10:00 開、午餐 11:00 起｜週六建議 10:45 到"},
+ {n:"久世福商店 PARCO_ya 上野店", t:"地方食品・伴手禮", d:"9/18 或 9/19", u:"https://maps.app.goo.gl/fW1cPgZ1hwRnEQFf6?g_st=ic", w:"與 HARBS 同一棟，午餐後零繞路｜比多慶屋早關"},
+ {n:"TAKEYA 1 多慶屋", t:"零食・藥妝・日用品", d:"9/18 或 9/19", u:G("TAKEYA+1+Okachimachi+Tokyo"), w:"台東區台東4-33-2｜1F–3F 通常營業到 23:00"}
+]},
+{a:"谷中・根津", l:[
+ {n:"Le Coussinet", t:"法式甜點", d:"9/19 谷中散步", u:"https://maps.app.goo.gl/fHJHipVb1RzqN4AW7", w:"時間不足直接取消"}
+]},
+{a:"其他收藏（本次未排）", l:[
+ {n:"Pelican Cafe（淺草／田原町）", t:"早午餐", d:"未安排", u:"https://yukigo.tw/pelican-cafe/", w:"目前不為這間店特地加淺草行程"}
+]}
 ];
 
 /* 出發前準備：[文字, 優先級 1紅/2黃/3白, 是否預設已完成] */
@@ -807,8 +894,10 @@ function refreshPrep(){
   if(d) d.textContent = "🔴 必須完成還剩 "+st.redLeft+" 項";
   document.querySelectorAll("[data-sec]").forEach(e=>e.textContent = secStats(+e.dataset.sec));
 }
-const VERSION = "v6・2026-09-06";
-const CH = {"必去":"c-must","已訂":"c-booked","建議":"c-rec","候補":"c-alt","可取消":"c-drop"};
+const VERSION = "v11・2026-09-06";
+const CH = {"必去":"c-must","已訂":"c-booked","建議":"c-rec","候補":"c-alt","可取消":"c-drop",
+  "正餐候選":"c-alt","美食候選":"c-alt","甜點候選":"c-alt","咖啡候選":"c-alt",
+  "伴手禮候選":"c-alt","順路候選":"c-alt"};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let checks = {}, curDay = 1, curView = "day";
 
@@ -874,6 +963,8 @@ function itemHTML(it, di, i){
   if(it.pts && it.pts.length) h += '<ul class="pts">'+it.pts.map(p=>'<li>'+esc(p)+'</li>').join("")+'</ul>';
   if(it.warn) h += '<div class="warn">'+esc(it.warn)+'</div>';
   const acts = [];
+  if(it.want){ const wk = "w"+k, on = !!checks[wk];
+    acts.push('<button class="btn want'+(on?" on":"")+'" data-want="'+wk+'">'+(on?"★ 想吃":"☆ 想吃")+'</button>'); }
   if(it.map) acts.push(mapBtn(it.map));
   if(it.map2) acts.push(mapBtn(it.map2,"map"));
   if(it.addr) acts.push('<button class="btn copy" data-copy="'+esc(it.addr)+'">複製地址</button>');
@@ -956,11 +1047,20 @@ function infoHTML(){
      "日暮里站也可兌換 Skyliner（售票機／JR 換乘檢票口）05:00–23:30",
      "9/19 回程 Skyliner 首選 16:25，備案 15:45",
      "護照、KKday 憑證、EMot 票面建議離線存手機；手機要有電"].map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
-  h += '<div class="sect"><h4>朋友推薦店家</h4></div>';
-  h += PICKS.map(p=>'<article class="card"><h3>'+esc(p.n)+'</h3><p class="meta">'+esc(p.u)+'</p>'+
-    '<p class="meta">'+esc(p.d)+'</p>'+(p.a?'<p class="meta">'+esc(p.a)+'</p>':'')+
-    '<div class="acts"><button class="btn map" data-url="'+p.m+'">開啟連結</button>'+
-    (p.a?'<button class="btn copy" data-copy="'+esc(p.a)+'">複製地址</button>':'')+'</div></article>').join("");
+  h += '<div class="sect"><h4>餐廳與食品店一覽</h4><span>'+EATS.reduce((a,g)=>a+g.l.length,0)+' 間</span></div>';
+  h += '<p class="meta" style="margin:-2px 0 10px">按「☆ 想吃」收藏，狀態存在這台裝置。營業時間、臨時休業與售完狀況都是動態資訊，當天再確認。</p>';
+  h += EATS.map((g,gi)=>{
+    const inner = g.l.map((e,i)=>{
+      const wk = "we"+gi+"-"+i, on = !!checks[wk];
+      return '<article class="card" style="margin:0 0 8px"><h3>'+esc(e.n)+'</h3>'+
+        '<p class="meta">'+esc(e.t)+'　·　'+esc(e.d)+'</p>'+
+        (e.w?'<p class="meta">'+esc(e.w)+'</p>':'')+
+        '<div class="acts"><button class="btn want'+(on?" on":"")+'" data-want="'+wk+'">'+(on?"★ 想吃":"☆ 想吃")+'</button>'+
+        '<button class="btn map" data-url="'+e.u+'">開啟 Google Maps</button></div></article>';
+    }).join("");
+    return '<details class="sec"><summary>'+esc(g.a)+'<span class="cnt num">'+g.l.length+'</span></summary>'+
+      '<div class="in" style="padding:2px 10px 10px">'+inner+'</div></details>';
+  }).join("");
   h += '<div class="sect"><h4>緊急時</h4></div><div class="card"><ul class="pts">'+
     ["日本警察 110／消防・救護 119","旅外國人急難救助全球免付費專線：先確認撥打方式再存進手機",
      "飯店地址用上方「複製地址」直接出示","走散時約定回合點：當日住宿飯店大廳"].map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
@@ -991,6 +1091,9 @@ document.addEventListener("click", e=>{
   if(tab){ curDay = +tab.dataset.day; curView = "day"; render(); return; }
   const nav = e.target.closest("nav.bot button");
   if(nav){ curView = nav.dataset.view; render(); return; }
+  const wb = e.target.closest("[data-want]");
+  if(wb){ const k=wb.dataset.want; checks[k]=!checks[k]; save();
+    wb.classList.toggle("on", !!checks[k]); wb.textContent = checks[k]?"★ 想吃":"☆ 想吃"; return; }
   const go = e.target.closest("[data-go]");
   if(go){ curView = go.dataset.go; onlyTodo = true; render(); return; }
   const sg = e.target.closest(".sgb");
