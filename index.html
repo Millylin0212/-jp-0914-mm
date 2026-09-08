@@ -269,14 +269,17 @@ const DAYS = [
 
   {t:"20:30", time:"約 20:30", title:"兌換 Skyliner 實體票（去程＋回程一起換）", status:"必去", fixed:true,
    meta:"第 2 航廈 SKYLINER & KEISEI INFORMATION CENTER｜07:00–23:30",
-   pts:["KLOOK 憑證在售票機或服務中心兌換","去程與 9/19 回程建議同時換掉，省掉最後一天的變數",
-        "21:00 之後服務中心不辦，要改到 Skyliner 售票櫃檯","入境慢的話直接找櫃檯，不要卡在機器前"],
+   pts:["入境後依序找 鉄道／Trains → Keisei／京成 → Skyliner，往 B1F",
+        "車站名：空港第2ビル駅／Airport Terminal 2・3 Station",
+        "KLOOK 憑證在售票機或服務中心兌換","去程與 9/19 回程建議同時換掉，省掉最後一天的變數",
+        "21:00 之後服務中心不辦，要改到 Skyliner 售票櫃檯","全車指定席，上車前確認車次、車廂、座位"],
    map:{n:"京成電鐵 成田機場第 2 航廈站", u:G("Keisei+Narita+Airport+Terminal+2+Station")},
-   route:[{s:"成田機場 第 2 航廈"},{l:"skyliner"},{s:"日暮里站"}],
+   route:[{s:"空港第2ビル駅"},{l:"skyliner", note:"往日暮里，不要坐到京成上野"},{s:"日暮里站"}],
    warn:"當晚實際搭乘班次現場看電子看板，末班約 23:30 前。"},
 
   {t:"21:10", time:"約 21:10", title:"抵達日暮里，進飯店", status:"已訂",
    meta:HOTEL_TOKYO.name+"｜"+HOTEL_TOKYO.note,
+   pts:["拖行李優先走 East Exit／東口，先找電梯，不追求最短距離","出東口後直接開步行導航，不要靠方向感猜路"],
    map:{n:"ART HOTEL Nippori Lungwood", u:HOTEL_TOKYO.map}, addr:HOTEL_TOKYO.addr},
 
   {t:"21:40", time:"晚餐", soft:true, title:"馬賊 日暮里店", status:"候補",
@@ -308,15 +311,19 @@ const DAYS = [
    map:{n:"三明治 ポポー", u:"https://maps.app.goo.gl/GzbQVwqzYaEbmX186"},
    warn:"今天有 13:00 Romancecar 的硬時間。若隊伍長就直接放棄，改買便利商店。"},
 
-  {t:"10:15", time:"10:15", title:"回飯店拿行李", status:"必去",
-   pts:["29 吋＋20 吋行李","最後確認護照、KLOOK 憑證、Romancecar 訂單"]},
+  {t:"10:15", time:"10:15", title:"回飯店整理行李｜大行李寄放", status:"必去",
+   meta:"飯店已同意 9/15 退房後免費寄放到 9/17 再入住",
+   pts:["只帶箱根兩晚要用的東西，29 吋大行李留在飯店","少了大行李，新宿轉乘與換票會輕鬆很多",
+        "最後確認護照、KKday 憑證、EMot 兩張特急券"]},
 
   {t:"10:40", time:"10:40", title:"離開 ART HOTEL 前往新宿", status:"必去",
-   route:[{s:"日暮里站"},{l:"jr", note:"往池袋／新宿方向", mins:"約 25 分"},{s:"新宿站"}],
-   warn:"帶大行李，不能只用列車時間計算。電梯、月台移動、人潮都要算進去。"},
+   route:[{s:"日暮里站"},{l:"jr", note:"往池袋・新宿方面", mins:"約 25 分"},{s:"新宿站"}],
+   pts:["進 JR 日暮里站，不要搭到上野・東京方面（反向）"],
+   warn:"雖然只帶小行李，仍要留緩衝。12:00 前到新宿這條規則不變。"},
 
   {t:"11:20", time:"11:20", title:"目標抵達新宿", status:"必去", fixed:true,
    meta:"控制點：最晚 11:40，不可晚於 12:00",
+   pts:["下車後不要急著出地面","先找 West Exit／西口","再找 Odakyu Line／小田急線 指標"],
    map:{n:"小田急新宿站", u:G("Odakyu+Shinjuku+Station")}},
 
   {t:"11:30", time:"11:20–12:30", title:"兌換箱根周遊券（實體票）", status:"必去",
@@ -337,8 +344,8 @@ const DAYS = [
    map:{n:"箱根湯本站", u:G("Hakone-Yumoto+Station")}},
 
   {t:"14:30", time:"約 14:30", title:"湯本富士屋酒店 Check-in", status:"已訂",
-   meta:HOTEL_HAKONE.note,
-   route:[{s:"箱根湯本站"},{l:"walk", mins:"3–5 分"},{s:"湯本富士屋酒店"}],
+   meta:"官方動線：出站 → 過橋 → 飯店外部電梯 → Lobby，約 3 分鐘",
+   route:[{s:"箱根湯本站"},{l:"walk", note:"過橋後找外部電梯", mins:"3–5 分"},{s:"湯本富士屋酒店"}],
    map:{n:"Yumoto Fujiya Hotel", u:HOTEL_HAKONE.map}, addr:HOTEL_HAKONE.addr},
 
   {t:"15:00", time:"15:00–17:00", title:"箱根湯本商店街", status:"建議",
@@ -442,16 +449,19 @@ const DAYS = [
 
   {t:"15:52", time:"15:52", title:"箱根 14 號 (EXE6) 回東京", status:"已訂", fixed:true,
    meta:"2 號車廂 2A・2B｜確認編號 E464｜15:52 → 新宿 17:27",
-   route:[{s:"箱根湯本"},{l:"romancecar", mins:"95 分"},{s:"新宿"},{l:"jr", mins:"約 25 分"},{s:"日暮里"}],
-   pts:["EMot 電子特急券，不用取票，上車前登入叫出票面","周遊券 9/17 仍在效期內，回程乘車券由它涵蓋","新宿轉 JR 山手線帶行李，抓 20–25 分緩衝"]},
+   route:[{s:"箱根湯本"},{l:"romancecar", mins:"95 分"},{s:"新宿"},{l:"jr", note:"往池袋・田端・上野方面", mins:"約 25 分"},{s:"日暮里"}],
+   pts:["EMot 電子特急券，不用取票，上車前登入叫出票面","周遊券 9/17 仍在效期內，回程乘車券由它涵蓋",
+        "小田急新宿下車後找 JR Lines → 山手線 → 池袋・田端・上野方面"]},
 
   {t:"17:30", time:"17:30–18:00", title:"茶の池田や（新宿西口地下街）", status:"建議",
    meta:"抹茶專門小店，可能有丸久小山園｜營業至 21:00｜下車就在同一層，順路不繞遠",
    pts:["新宿站往「西口」進地下街","走到「小田急 Ace」南館區域（靠京王線南口方向的地下通道）",
-        "店面小、位置隱密，全程地下不必撐傘","帶著行李逛，控制在 30 分鐘內"],
+        "店面小、位置隱密，全程地下不必撐傘","只帶箱根的小行李，逛起來輕鬆"],
    map:{n:"茶の池田や", u:"https://maps.app.goo.gl/92AovjDZzkmMQu8QA"}},
 
-  {t:"18:10", time:"約 18:10", title:"回 ART HOTEL 放行李", map:{n:"ART HOTEL Nippori Lungwood", u:HOTEL_TOKYO.map}},
+  {t:"18:10", time:"約 18:10", title:"回 ART HOTEL Check-in", status:"已訂",
+   meta:"取回 9/15 寄放的大行李",
+   map:{n:"ART HOTEL Nippori Lungwood", u:HOTEL_TOKYO.map}},
 
   {t:"19:00", time:"晚上 A", title:"日暮里晚餐＋斉藤湯", status:"建議",
    meta:"斉藤湯週五公休，要泡就是今晚",
@@ -477,7 +487,8 @@ const DAYS = [
    map:{n:"三明治 ポポー", u:"https://maps.app.goo.gl/GzbQVwqzYaEbmX186"}},
 
   {t:"10:30", time:"約 10:30", title:"出發前往戶越銀座", status:"必去",
-   route:[{s:"日暮里"},{l:"jr"},{s:"五反田"},{l:"ikegami"},{s:"戶越銀座站"}],
+   route:[{s:"日暮里"},{l:"jr", note:"往上野・東京・品川方面"},{s:"五反田"},{l:"ikegami", note:"往蒲田方面"},{s:"戶越銀座站"}],
+   pts:["五反田下車後找 Tokyu Ikegami Line／東急池上線","路線：五反田 → 大崎廣小路 → 戶越銀座"],
    map:{n:"五反田站", u:G("Gotanda+Station")},
    map2:{n:"戶越銀座站", u:G("Togoshi-Ginza+Station")}},
 
@@ -487,7 +498,8 @@ const DAYS = [
 
   {t:"14:00", time:"約 14:00", title:"戶越 → 東銀座", status:"必去",
    meta:"不要折返回五反田",
-   route:[{s:"戶越銀座商店街"},{l:"walk"},{s:"都營淺草線 戶越站"},{l:"asakusa"},{s:"東銀座站"}],
+   route:[{s:"戶越銀座商店街"},{l:"walk"},{s:"都營淺草線 戶越站"},{l:"asakusa", note:"往押上・淺草方面"},{s:"東銀座站"}],
+   pts:["戶越銀座站＝東急池上線，戶越站＝都營淺草線，是兩個不同的站","逛完商店街後步行到戶越站，不要走回原本下車那站"],
    map:{n:"戶越站", u:G("Togoshi+Station+Tokyo")},
    map2:{n:"東銀座站", u:G("Higashi-Ginza+Station")}},
 
@@ -599,8 +611,9 @@ const DAYS = [
 
   {t:"16:25", time:"16:25", title:"Skyliner 前往成田", status:"已訂", fixed:true,
    meta:"首選班次｜連假人潮明顯則改搭約 15:45",
-   route:[{s:"日暮里"},{l:"skyliner", mins:"約 40 分"},{s:"成田機場 第 2 航廈"}],
-   pts:["票應該在 9/14 成田或 9/18 日暮里就換好了","若仍未換，日暮里站售票機／JR 換乘檢票口可兌換（05:00–23:30）"],
+   route:[{s:"日暮里"},{l:"skyliner", note:"往成田空港", mins:"約 40 分"},{s:"空港第2ビル駅"}],
+   pts:["拖行李進日暮里站後找 Keisei／京成，不要找 JR","在 空港第2ビル駅（Airport Terminal 2・3）下車，不要坐到 Terminal 1",
+        "票應該在 9/14 成田或 9/18 日暮里就換好了","若仍未換，日暮里站售票機／JR 換乘檢票口可兌換（05:00–23:30）"],
    warn:"兌換班次指定 16:00–16:30 之間。連假人潮明顯就搭較早那班。"},
 
   {t:"20:40", time:"20:40", title:"JX805 成田起飛", status:"已訂", fixed:true,
@@ -710,6 +723,8 @@ const PREP = [
  ["9/14 ART HOTEL Nippori Lungwood",1,1],
  ["9/15–9/17 湯本富士屋酒店",1,1],
  ["9/17–9/19 ART HOTEL Nippori Lungwood",1,1],
+ ["ART HOTEL 已同意 9/15 退房後免費寄放大行李至 9/17",1,1],
+ ["9/15 出發前分裝：箱根兩晚要用的東西另外裝小行李",1,0],
  {sub:"🚆 日本交通"},
  ["Skyliner 去程票｜成田 → 日暮里（KLOOK）",1,1],
  ["Skyliner 回程票｜日暮里 → 成田（KLOOK・首選 16:25）",1,1],
@@ -894,7 +909,7 @@ function refreshPrep(){
   if(d) d.textContent = "🔴 必須完成還剩 "+st.redLeft+" 項";
   document.querySelectorAll("[data-sec]").forEach(e=>e.textContent = secStats(+e.dataset.sec));
 }
-const VERSION = "v11・2026-09-06";
+const VERSION = "v12・2026-09-06";
 const CH = {"必去":"c-must","已訂":"c-booked","建議":"c-rec","候補":"c-alt","可取消":"c-drop",
   "正餐候選":"c-alt","美食候選":"c-alt","甜點候選":"c-alt","咖啡候選":"c-alt",
   "伴手禮候選":"c-alt","順路候選":"c-alt"};
@@ -1037,6 +1052,20 @@ function infoHTML(){
       '<p class="meta">'+esc(x.note)+'</p><div class="acts">'+mapBtn({n:"導航",u:x.map})+
       '<button class="btn copy" data-copy="'+esc(x.addr)+'">複製地址</button></div></article>';
   });
+  h += '<div class="sect"><h4>六天交通口令</h4><span>認線名＋方向</span></div>';
+  h += '<div class="card"><ul class="pts">'+
+    ["<b>Day 1</b>　NRT T2 → B1F → 京成 Skyliner → 日暮里 → 東口＋電梯 → ART HOTEL",
+     "<b>Day 2</b>　日暮里 JR → 山手線 池袋・新宿方面 → 新宿 → 西口／小田急 → 換周遊券 → 13:00 Romancecar → 箱根湯本 → 過橋 → 外部電梯",
+     "<b>Day 3</b>　巴士 → 神社 → 海賊船 → 空中纜車 → 大涌谷 → 空中纜車 → 登山纜車 → 登山電車",
+     "<b>Day 4</b>　箱根湯本 → Romancecar 15:52 → 新宿 → 山手線 池袋・田端・上野方面 → 日暮里",
+     "<b>Day 5</b>　日暮里 → 山手線 上野・東京・品川方面 → 五反田 → 池上線 蒲田方面 → 戶越銀座 → 步行戶越站 → 淺草線 押上・淺草方面 → 東銀座",
+     "<b>Day 6</b>　日暮里 京成 Skyliner → 空港第2ビル駅 → NRT T2 → JX805"
+    ].map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
+  h += '<div class="sect"><h4>現場避免迷路</h4></div><div class="card"><ul class="pts">'+
+    ["先認「線名＋方向」，不要死背月台號碼","有行李優先搭電梯，不追求最短距離",
+     "新宿地下轉乘看實體標示：JR／Odakyu／West Exit","戶越銀座站（池上線）與戶越站（淺草線）不是同一站",
+     "Skyliner 是京成，不是 JR","箱根 Cable Car（登山纜車）與 Ropeway（空中纜車）是不同交通工具",
+     "搭錯方向就下一站下車換對向，不要慌"].map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
   h += '<div class="sect"><h4>票券備忘</h4></div><div class="card"><ul class="pts">'+
     ["去程 9/15 箱根 9 號 (MSE6)｜新宿 13:00 → 箱根湯本 14:30｜4 號車廂 2A・2B｜E272",
      "回程 9/17 箱根 14 號 (EXE6)｜箱根湯本 15:52 → 新宿 17:27｜2 號車廂 2A・2B｜E464",
